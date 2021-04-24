@@ -22,7 +22,7 @@ class SettingService {
             throw new Error("User already exists!")
         }
 
-        const settings = this.settingsRepository.create({ chat, username });
+        const settings = await this.settingsRepository.create({ chat, username });
         await this.settingsRepository.save(settings);
         return settings;
     }
@@ -32,6 +32,22 @@ class SettingService {
             username
         });
         return settings;
+    }
+
+    async update(username: string, chat: boolean) {
+     
+        const settings = await this.settingsRepository.findOne({
+            username
+        });
+
+        if (!settings) {
+            throw new Error("Username not found!")
+        }
+        
+        settings.chat = chat;
+
+        const newSetting = this.settingsRepository.create(settings);
+        return newSetting;
     }
 }
 

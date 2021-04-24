@@ -17,7 +17,7 @@ class ConnectionService {
     }
 
     async create({ admin_id, socket_id, user_id, id }: IConnectionCreate) {
-        const connection = this.connectionsRepository.create({
+        const connection = await this.connectionsRepository.create({
             admin_id,
             user_id,
             socket_id,
@@ -29,7 +29,7 @@ class ConnectionService {
     }
 
     async findByUserId(user_id: string) {
-        const connection = this.connectionsRepository.findOne({
+        const connection = await this.connectionsRepository.findOne({
             user_id
         });
         return connection;
