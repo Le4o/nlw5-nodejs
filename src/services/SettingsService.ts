@@ -22,7 +22,7 @@ class SettingService {
             throw new Error("User already exists!")
         }
 
-        const settings = await this.settingsRepository.create({ chat, username });
+        const settings = this.settingsRepository.create({ chat, username });
         await this.settingsRepository.save(settings);
         return settings;
     }
@@ -47,6 +47,7 @@ class SettingService {
         settings.chat = chat;
 
         const newSetting = this.settingsRepository.create(settings);
+        await this.settingsRepository.save(newSetting);
         return newSetting;
     }
 }

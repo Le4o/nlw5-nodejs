@@ -17,7 +17,7 @@ class ConnectionService {
     }
 
     async create({ admin_id, socket_id, user_id, id }: IConnectionCreate) {
-        const connection = await this.connectionsRepository.create({
+        const connection = this.connectionsRepository.create({
             admin_id,
             user_id,
             socket_id,

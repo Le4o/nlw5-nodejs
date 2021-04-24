@@ -20,7 +20,7 @@ class UserService {
             return userExists;
         }
 
-        const user = await this.usersRepository.create({
+        const user = this.usersRepository.create({
             email
         });
 
